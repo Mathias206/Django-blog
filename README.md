@@ -4,7 +4,7 @@ Esse é um blog construido usando o Framework Django. **Este projeto ainda receb
 
 ## Funcionalidades:
 - Criação de novos posts
-- Edição de post já criados
+- Edição de posts já criados
 - Exclusão de posts já criados
 - Autenticação básica de usuários
 - Sistema de Login e Registro de usuários
