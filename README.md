@@ -1,6 +1,6 @@
 # Blog simples em Django
 - - - -
-Esse é um blog construido usando o Framework Django. **Este projeto ainda receberá atualizações.**
+Este é um blog construido usando o Framework Django. **Este projeto ainda receberá atualizações.**
 
 ## Funcionalidades:
 - Criação de novos posts
