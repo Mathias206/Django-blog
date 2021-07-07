@@ -5,43 +5,90 @@
 
 
 <div class="d-flex justify-content-center mt-sm-5">
-    <div class="d-inline-flex p-4 rounded shadow-lg p-3 mb-5 bg-white rounded">
-        <form action="" method="POST">
-            {% csrf_token %}
-            <h2>Sign Up</h2>
-            <div class="form-group">
-                <label for="username">Username:</label>
-                {{ form.username }}
-            </div>
-            <div class="form-group">
-                <label for="pwd">Email:</label>
-                {{ form.email }}
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                {{ form.password1 }}
-            </div>
-            <div class="form-group">
-                <label for="pwd">Confirm password:</label>
-                {{ form.password2 }}
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Create account</button>
-            </div>
-            <div class="form-group">
-                <span>Already have an account?</span> <a href="{% url 'user_login' %}" class="link">Sign In</a>
-            </div>
-            <div class="form-group">
-                    
-            </div>
-        </form>
-    </div>
+  <div class="d-inline-flex p-4 rounded shadow-lg p-3 mb-5 bg-white rounded">
+    <form action="" method="POST" class="needs-validation" novalidate>
+      {% csrf_token %}
+      <h2 class="text-center">Sign Up</h2>
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input class="form-control" type="text" name="username" maxlength="150" autofocus required id="id_username">
+        <div class="invalid-feedback">This field is riquired</div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input class="form-control" type="email" name="email" maxlength="254" id="id_email">
+        <div class="invalid-feedback">This field is riquired</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="pwd">Password:</label>
+          <input class="form-control" id="password1" type="password" name="password1" onchange='check()'
+            autocomplete="new-password" required id="id_password1">
+          <div class="invalid-feedback">This field is riquired</div>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="pwd">Confirm password:</label>
+          <input class="form-control" id="password2" type="password" name="password2" onchange='check()'
+            autocomplete="new-password" required id="id_password2">
+          <div class="invalid-feedback">This field is riquired</div>
+        </div>
+      </div>
+      <div class="alert alert-primary form-group text-center" id="password_alert" style="display: none;" role="alert">
+        Passwords don't match!
+      </div>
+      {% if register_error %}
+      <div class="alert alert-primary form-group text-center">
+        {{ register_error }}
+      </div>
+      {% endif %}
+      <div class="form-group">
+        <button type="submit" id="submit" class="btn btn-primary btn-block">Create account</button>
+      </div>
+      <div class="form-group">
+        <span>Already have an account?</span> <a href="{% url 'user_login' %}" class="link">Sign In</a>
+      </div>
+      <div class="form-group">
+
+      </div>
+    </form>
+  </div>
 </div>
 
 <style>
-    body {
-        background-color: rgb(233, 233, 233) !important;
-    }
+  body {
+    background-color: rgb(233, 233, 233) !important;
+  }
 </style>
+
+<script>
+  (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+
+  var check = function () {
+    if (document.getElementById('password1').value ==
+      document.getElementById('password2').value) {
+      document.getElementById('password_alert').style.display = 'none';
+      document.getElementById('submit').disabled = false
+    } else {
+      document.getElementById('submit').disabled = true;
+      document.getElementById('password_alert').style.display = '';
+    }
+  }
+</script>
 
 {% endblock content %}
